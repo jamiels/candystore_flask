@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>The Candystore</title>
+</head>
+<body>
+    <h1>Welcome to the Candystore</h1>
+    <h2>Please make an order</h2>
+    <form action="/processOrder" method="POST">
+        Quantity: <input type="number" name="qty"><br>
+        
+        <select name="itemOrdered">
+            {% for k,v in product_rows %}
+            <option value="{{k}}">{{v}}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
