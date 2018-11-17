@@ -77,10 +77,11 @@ def insert_order(qty,product_id):
 
 def get_orders():
     connection = get_connection()
-    sql = "select * from orders"
+    sql = "select * from orders, product where orders.product_id = product.product_id"
     result = connection.cmd_query(sql)
     rows = connection.get_rows()
     connection.close()
+    print(rows[0])
     return rows[0]
 
 def get_connection():
