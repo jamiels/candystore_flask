@@ -37,10 +37,15 @@ def process_form1():
     print(password)
     return render_template('form_one.html')
 
+# http://flask.pocoo.org/docs/1.0/quickstart/
+
+# 1 - use bootstrap startup page
+# 2  - change to bootstrap.html
+# 3 set FLASK_DEBUG=True
 @app.route("/")
 def candystore_main():
     product_rows = get_products()
-    return render_template('candystore_main.html',product_rows=product_rows)
+    return render_template('candystore_main_bootstrap.2.html',product_rows=product_rows)
 
 # create table product (product_id int, product_name varchar(50));
 # insert into product values(1,'M&M'),(2,'KitKat'),(3,'Jelly Beans')
@@ -57,13 +62,13 @@ def candystore_processorder():
 @app.route("/viewOrders")
 def candystore_vieworders():
     orders = get_orders()
-    return render_template('candystore_orders.html',orders=orders)
+    return render_template('candystore_orders.1.html',orders=orders)
 
 def get_products():
     connection = mc.connect(user='root', password='jamiel',
                               host='127.0.0.1', database='candystore',
                               auth_plugin='mysql_native_password')
-    result = connection.cmd_query("select * from product")
+    result = connection.cmd_query("select * from products")
     rows = connection.get_rows()
     connection.close()
     return rows[0]
@@ -77,7 +82,7 @@ def insert_order(qty,product_id):
 
 def get_orders():
     connection = get_connection()
-    sql = "select * from orders, product where orders.product_id = product.product_id"
+    sql = "select * from orders, products where orders.product_id = products.product_id"
     result = connection.cmd_query(sql)
     rows = connection.get_rows()
     connection.close()
