@@ -45,7 +45,7 @@ def process_form1():
 @app.route("/")
 def candystore_main():
     product_rows = get_products()
-    return render_template('candystore_main_bootstrap.2.html',product_rows=product_rows)
+    return render_template('main.html',product_rows=product_rows)
 
 # create table product (product_id int, product_name varchar(50));
 # insert into product values(1,'M&M'),(2,'KitKat'),(3,'Jelly Beans')
